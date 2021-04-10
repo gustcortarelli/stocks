@@ -1,0 +1,36 @@
+spring:
+    profiles.active: ${stage:dev}
+    datasource:
+        url: ${db.url:jdbc:postgresql://${db.host:localhost}:${db.port:5432}/${db.name:stocks}}
+        username: ${db.username:postgres}
+        password: ${db.password:1010}
+
+    flyway:
+        schemas: public
+        baseline-on-migrate: true
+        baseline-version: 0
+        enabled: true
+
+    jpa:
+        database-platform: org.hibernate.dialect.PostgreSQLDialect
+        properties:
+            hibernate:
+                default_schema: stocks
+        show-sql: true
+        hibernate:
+            ddl-auto: validate
+
+    mvc:
+        converters:
+            preferred-json-mapper: gson
+
+#logging:
+#    level:
+#        root: debug
+
+alphavantage:
+    baseUrl: https://www.alphavantage.co/query
+    apikey: 5ZKAT5DQIRT00J2P
+
+server:
+    port: ${SERVER_PORT:8090}
